@@ -1,6 +1,7 @@
 const path = require('path')
-
+const isDev = process.env.NODE_ENV === 'development'
 module.exports = {
+  mode: isDev ? 'development' : 'production',
   target: 'node', // 打包出的的内容在那個執行環境中執行（Web瀏覽器/Node）
   entry: { // 入口配置
     app: path.join(__dirname, '../client/server-entry.js')
@@ -27,5 +28,10 @@ module.exports = {
         ]
       }
     ]
+  },
+  resolve: {
+    alias: {
+      'react-dom': '@hot-loader/react-dom'
+    }
   }
 }

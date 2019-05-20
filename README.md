@@ -194,7 +194,7 @@
   // 請求任何請求
   app.get('*', (req, res) => {
     const appString = ReactSSR.renderToString(serverEntry)
-    res.send(template.replace('<app></app>', appString))
+    res.send(template.replace('<!-- app -->', appString))
   })
 
   app.listen(port, (err) => {
@@ -205,4 +205,71 @@
 # vim package.json
   "dev:start": "node server/server.js"
 # yarn dev:start
+```
+
+## webpack-dev-server 配置
+
+> webpack 启动服务器，编译的结果存储于内存中，有文件变化自动编译。
+
+```sh
+# yarn add -D webpack-dev-server cross-env
+# vim build/webpack.config.client.js
+  const isDev = process.env.NODE_ENV === 'development'
+  if (isDev) {
+    config.devServer = {
+      host: '0.0.0.0',
+      port: 4000,
+      contentBase: path.join(__dirname, '../dist'),
+      hot: true,
+      overlay: {
+        errors: true // 编译出错时网页上遮罩层显示错误信息
+      },
+      publicPath: '/public',
+      historyApiFallback: {
+        index: '/public/index.html'
+      }
+    }
+  }
+  module.exports = config
+# vim package.json
+  "dev-client:start": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
+
+# yarn add -D react-hot-loader
+# vim build/webpack.config.client.js
+  if (isDev) {
+    config.devServer = {
+      hot: true,
+    }
+  }
+  module.exports = config
+
+# vim .babelrc
+  {
+    "plugins": ["react-hot-loader/babel"]
+  }
+
+# vim client/App.jsx
+  import React, { Component } from 'react'
+  import { hot } from 'react-hot-loader/root'
+
+  class App extends Component {
+    render () {
+      return (
+        <div>
+          This is WebApp
+        </div>
+      )
+    }
+  }
+  export default hot(App)
+
+# yarn dev-client:start
+```
+
+## 开发时的服务端渲染
+
+```sh
+# yarn add axios
+# yarn add -D memory-fs http-proxy-middleware
+# yarn add react-dom@npm:@hot-loader/react-dom
 ```
