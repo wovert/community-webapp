@@ -7,11 +7,13 @@ module.exports = {
   },
   output: { // 输出配置
     filename: '[name].[hash].js', // 输出文件名name=entry.path
-    path: path.join(__dirname, '../dist'), // 输出目录
-    // publicPath: '/public' // 引用打包的JS文件在HTML文件中基路径，可以指定CDN全路径
+    // path: path.join(__dirname, '../dist'), // 输出目录
+    publicPath: '/public' // 引用打包的JS文件在HTML文件中基路径，可以指定CDN全路径
   },
   plugins: [
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, '../client/index.html')
+    })
   ],
   module: {
     rules: [

@@ -154,3 +154,55 @@
 
 ## 服务端渲染基础配置
 
+- SEO 問題
+- 白屏：首次請求等待時間較長，體驗不好
+
+### React 中如何使用服務端渲染
+
+`react-dom` 是 React 專門為 Web 段開發的渲染工具。我們可以在客戶端使用 `react-dom` 的 `render` 方法渲染組件，而在服務端，`react-dom/server` 提供我們將 react 組件渲染成 HTML 的方法
+
+```sh
+# yarn add -D rimraf
+# vim client/server-entry.js
+  import React from 'react'
+  import App from './App.jsx'
+  export default <App />
+
+# vim package.json
+  "dev-client:build": "webpack --mode=development --config build/webpack.config.client.js",
+  "dev-server:build": "webpack --mode=development --config build/webpack.config.server.js",
+  "clear": "rimraf dist",
+  "dev:build": "yarn clear && yarn dev-client:build && yarn dev-server:build"
+
+# yarn dev:build
+# yarn add express
+# mkdir server
+# vim server/server.js
+  const express = require('express')
+  const ReactSSR = require('react-dom/server')
+  const fs = require('fs')
+  const path = require('path')
+  const serverEntry = require('../dist/server-entry').default // require會讀取所有export
+
+  const template = fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf8')
+  const app = express()
+  const port = 4001
+
+  // 靜態資源
+  app.use('/public', express.static(path.join(__dirname, '../dist')))
+
+  // 請求任何請求
+  app.get('*', (req, res) => {
+    const appString = ReactSSR.renderToString(serverEntry)
+    res.send(template.replace('<app></app>', appString))
+  })
+
+  app.listen(port, (err) => {
+    console.log(`server is listening on ${port}`)
+  })
+# vim client/app.js
+  ReactDOM.hydrate(<App />, document.getElementById('root'))
+# vim package.json
+  "dev:start": "node server/server.js"
+# yarn dev:start
+```

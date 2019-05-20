@@ -4,7 +4,11 @@
   "description": "- SEO不友好\r - 加载首屏时间较长，用户体验差",
   "main": "index.js",
   "scripts": {
-    "dev:build": "webpack --mode=development --config build/webpack.config.js"
+    "dev-client:build": "webpack --mode=development --config build/webpack.config.client.js",
+    "dev-server:build": "webpack --mode=development --config build/webpack.config.server.js",
+    "clear": "rimraf dist",
+    "dev:build": "yarn clear && yarn dev-client:build && yarn dev-server:build",
+    "dev:start": "node server/server.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +21,7 @@
   },
   "homepage": "https://github.com/wovert/community-webapp#readme",
   "dependencies": {
+    "express": "^4.17.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
@@ -27,6 +32,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
     "html-webpack-plugin": "^3.2.0",
+    "rimraf": "^2.6.3",
     "webpack": "^4.31.0",
     "webpack-cli": "^3.3.2"
   }
