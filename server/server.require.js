@@ -1,8 +1,7 @@
-import express from 'express'
-import React from 'react'
-import { renderToString } from 'react-dom/server'
-import fs from 'fs'
-import path from 'path'
+const express = require('express')
+const ReactSSR = require('react-dom/server')
+const fs = require('fs')
+const path = require('path')
 
 const isDev = process.env.NODE_ENV === 'development'
 const app = express()
@@ -16,7 +15,7 @@ if (!isDev) {
 
   // 請求任何請求
   app.get('*', (req, res) => {
-    const appString = renderToString(serverEntry)
+    const appString = ReactSSR.renderToString(serverEntry)
     res.send(template.replace('<!-- app -->', appString))
   })
 } else {

@@ -7,8 +7,9 @@
     "dev-client:build": "webpack --mode=development --config build/webpack.config.client.js",
     "dev-server:build": "webpack --mode=development --config build/webpack.config.server.js",
     "dev:build": "yarn clear && yarn dev-client:build && yarn dev-server:build",
-    "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
-    "dev:server": "cross-env NODE_ENV=development node server/server.js",
+    "dev:client": "yarn clear && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
+    "prod:server": "cross-env NODE_ENV=production nodemon --exec babel-node server/server.js",
+    "dev:server": "cross-env NODE_ENV=development nodemon --exec babel-node server/server.js",
     "clear": "rimraf dist"
   },
   "repository": {
@@ -29,7 +30,9 @@
     "react-dom": "npm:@hot-loader/react-dom"
   },
   "devDependencies": {
+    "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
+    "@babel/node": "^7.4.5",
     "@babel/plugin-transform-react-jsx": "^7.3.0",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
