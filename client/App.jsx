@@ -5,7 +5,7 @@ class App extends Component {
   render () {
     return (
       <div>
-        This is WebApp 12313
+        This is WebApp 123 456
       </div>
     )
   }
