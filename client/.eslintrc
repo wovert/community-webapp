@@ -11,9 +11,11 @@
   },
   "extends": "airbnb",
   "rules": {
+    "no-console": "off",
     "semi": [0],
     "linebreak-style": [0 ,"error", "windows"],
     "jsx-a11y/anchor-js-valid": [0],
+    "react/require-default-props": [0],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   }
 }

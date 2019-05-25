@@ -6,7 +6,9 @@ import { hot } from 'react-hot-loader/root'
 import {
   BrowserRouter,
 } from 'react-router-dom'
+import { Provider } from 'mobx-react'
 import App from './App'
+import appState from '../store/app-state'
 
 class ClientApp extends Component {
   componentDidMount() {
@@ -15,9 +17,11 @@ class ClientApp extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <Provider appState={appState}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
     )
   }
 }

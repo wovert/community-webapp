@@ -1,4 +1,5 @@
 import React from 'react'
+// eslint-disable-next-line import/no-unresolved
 import ReactDOM from 'react-dom'
 // eslint-disable-next-line import/no-unresolved
 import ClientApp from './views/ClientApp'

@@ -461,3 +461,26 @@ HTML5 API 中的 `history` 能够让我们控制 url 跳转之后并不刷新新
 ```sh
 yarn add react-router-dom
 ```
+
+## Mobx
+
+```sh
+# npm install --save-dev @babel/plugin-proposal-decorators
+# npm i --save-dev @babel/plugin-proposal-class-properties
+# vim .babelrc
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose" : true }],
+    "react-hot-loader/babel"
+  ]
+
+# yarn add mobx mobx-react
+# yarn add prop-types
+
+```
+
+## Cnode API
+
+```sh
+npm i body-parser express-session query-string -S
+```
