@@ -336,3 +336,106 @@
 # yarn dev:client
 # yarn dev:server
 ```
+
+## eslint 和 editorconfig 规范代码
+
+[eslint官网](http://eslint.org)
+
+### why eslint
+
+- 规范代码有利于团队协作
+- 纯手工费时费力，不能保证准确性
+- 自动提醒功能，提高开发效率
+
+```sh
+# npm i -g eslint
+# npm i babel-eslint \
+eslint-config-airbnb eslint-config-standard \
+eslint-loader \
+eslint-plugin-import \
+eslint-plugin-jsx-a11y \
+eslint-plugin-node \
+eslint-plugin-promise \
+eslint-plugin-react \
+eslint-plugin-standard -D
+
+# eslint --init
+# vim .eslintrc
+ {
+   "extends": "standard"
+ }
+# vim client/.eslintrc
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "extends": "airbnb",
+  "rules": {
+    "semi": [0],
+    "linebreak-style": [0 ,"error", "windows"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  }
+}
+
+# vim webpack.config.js
+  rules: [
+    {
+      enforce: 'pre', // 编译之前
+      test: /.(js|jsx)$/,
+      loader: 'eslint-loader',
+      exclude: [
+        path.resolve(__dirname, '../node_modules')
+      ]
+    },
+  ]
+
+# .editorconfig
+root = true
+[*]
+chraset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+```
+
+## 工程架构优化
+
+```sh
+# yarn add -D webpack-merge
+
+# yarn add serve-favicon
+```
+
+## nodemon
+
+``` sh
+# yarn add nodemon
+# vim nodemon.json
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules",
+    ".eslintrc",
+    "client",
+    "build"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "verbose": true,
+  "ext": "js"
+}
+
+# vim package.json
+  nodemon --exec babel-node server/server.js
+```

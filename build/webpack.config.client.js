@@ -1,17 +1,18 @@
 const path = require('path')
+const webpackMerge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const baseConfig = require('./webpack.base')
 
 const isDev = process.env.NODE_ENV === 'development'
 
-config = {
+const config = webpackMerge(baseConfig, {
   mode: isDev ? 'development' : 'production',
   entry: { // 入口配置
     app: path.join(__dirname, '../client/app.js')
   },
-  devtool:'#eval-source-map',//设置source map选项
+  devtool: '#eval-source-map', // 设置source map选项
   output: { // 输出配置
     filename: '[name].[hash].js', // 输出文件名name=entry.path
-    path: path.join(__dirname, '../dist'), // 输出目录
     publicPath: 'http://localhost:4000/public/' // 引用打包的JS文件在HTML文件中基路径，可以指定CDN全路径
   },
   plugins: [
@@ -23,23 +24,8 @@ config = {
     alias: {
       'react-dom': '@hot-loader/react-dom'
     }
-  },
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env'],
-          plugins: ['@babel/plugin-transform-react-jsx']
-        },
-        exclude: [
-          path.join(__dirname, '../node_modules')
-        ]
-      }
-    ]
   }
-}
+})
 
 if (isDev) {
   config.devServer = {

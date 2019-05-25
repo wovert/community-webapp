@@ -1,5 +1,6 @@
 import express from 'express'
 import React from 'react'
+import favicon from 'serve-favicon'
 import { renderToString } from 'react-dom/server'
 import fs from 'fs'
 import path from 'path'
@@ -7,6 +8,8 @@ import path from 'path'
 const isDev = process.env.NODE_ENV === 'development'
 const app = express()
 const port = 4001
+
+app.use(favicon(path.join(__dirname, '../favicon.ico')))
 
 if (!isDev) {
   const serverEntry = require('../dist/server-entry').default // require會讀取所有export

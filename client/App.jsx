@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
-import { hot } from 'react-hot-loader/root'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import {
+  hot,
+} from 'react-hot-loader/root'
 
+// eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
-  render () {
+  render() {
     return (
       <div>
-        This is WebApp 123 456
+        This is WebApp 123
       </div>
     )
   }
