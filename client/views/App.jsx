@@ -20,6 +20,8 @@ class App extends Component {
           <br />
           <NavLink to="/detail">详情页</NavLink>
           <br />
+          <NavLink to="/test">测试</NavLink>
+          <br />
         </div>
         <Switch>
           <Routes />

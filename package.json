@@ -33,6 +33,7 @@
     "prop-types": "^15.7.2",
     "query-string": "^6.5.0",
     "react": "^16.8.6",
+    "react-async-bootstrapper": "^2.1.1",
     "react-dom": "npm:@hot-loader/react-dom",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",

@@ -484,3 +484,13 @@ yarn add react-router-dom
 ```sh
 npm i body-parser express-session query-string -S
 ```
+
+## store 数据同步
+
+> 每个页面有对应的数据，在uwuduan渲染时已经请求过对应数据，所以要让客户端知道这些数据，在客户端渲染的时候直接使用，而不是通过API再次请求，造成浪费。
+
+## 服务端渲染异步请求数据
+
+```sh
+yarn add react-async-bootstrapper
+```

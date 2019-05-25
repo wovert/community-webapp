@@ -5,7 +5,7 @@ import {
 } from 'mobx-react'
 import PropTypes from 'prop-types'
 // eslint-disable-next-line import/no-unresolved
-import { AppState } from '../../store/app-state'
+import AppState from '../../store/app-state'
 
 @inject('appState') @observer class TopicList extends Component {
   constructor(props) {
@@ -13,9 +13,17 @@ import { AppState } from '../../store/app-state'
     this.changeName = this.changeName.bind(this)
   }
 
-  componentDidMount() {
-    // do simething
-  }
+  // eslint-disable-next-line class-methods-use-this
+  // bootstrap() {
+  //   return new Promise((resolve) => {
+  //     resolve(true)
+  //     // setTimeout(() => {
+  //     //   // eslint-disable-next-line react/destructuring-assignment
+  //     //   this.props.appState.count = 3
+  //     //   resolve(true)
+  //     // })
+  //   })
+  // }
 
   changeName(event) {
     // eslint-disable-next-line react/destructuring-assignment

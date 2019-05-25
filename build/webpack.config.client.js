@@ -40,6 +40,9 @@ if (isDev) {
     historyApiFallback: {
       index: '/public/index.html'
     },
+    proxy: {
+      '/api': 'http://localhost:4001'
+    },
     headers: {
       'Access-Control-Allow-Origin': '*'
     }

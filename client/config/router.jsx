@@ -12,6 +12,8 @@ import TopicList from '../views/TopicList'
 // eslint-disable-next-line import/no-unresolved
 import TopicDetail from '../views/TopicDetail'
 
+import TestApi from '../views/Test/api-test'
+
 // export default () => (
 //   <Router>
 //     <div>
@@ -32,4 +34,5 @@ export default () => [
   <Route path="/" render={() => <Redirect to="/list" />} exact key="root" />,
   <Route path="/list" component={TopicList} key="list" />,
   <Route path="/detail" component={TopicDetail} key="detail" />,
+  <Route path="/test" component={TestApi} key="test" />,
 ]

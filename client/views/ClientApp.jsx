@@ -8,8 +8,9 @@ import {
 } from 'react-router-dom'
 import { Provider } from 'mobx-react'
 import App from './App'
-import appState from '../store/app-state'
+import AppState from '../store/app-state'
 
+const stores = new AppState()
 class ClientApp extends Component {
   componentDidMount() {
     // do something
@@ -17,7 +18,7 @@ class ClientApp extends Component {
 
   render() {
     return (
-      <Provider appState={appState}>
+      <Provider appState={stores}>
         <BrowserRouter>
           <App />
         </BrowserRouter>

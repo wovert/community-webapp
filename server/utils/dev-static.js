@@ -5,6 +5,7 @@ const webpack = require('webpack')
 const MemoryFs = require('memory-fs')
 const proxy = require('http-proxy-middleware')
 const ReactDomServer = require('react-dom/server')
+const asyncBootstrap = require('react-async-bootstrapper').default
 
 const serverConfig = require('../../build/webpack.config.server')
 
@@ -24,7 +25,7 @@ const mfs = new MemoryFs()
 // 编译打包服务端
 const serverCompiler = webpack(serverConfig)
 serverCompiler.outputFileSystem = mfs
-let serverBundle
+let serverBundle, createStoreMap
 
 // 监听编译打包服务端
 // stats webpack 打包的信息
@@ -49,6 +50,7 @@ serverCompiler.watch({}, (err, stats) => {
   const m = new Module()
   m._compile(bundle, 'server-entry.js')
   serverBundle = m.exports.default
+  createStoreMap = m.exports.createStoreMap
 })
 
 module.exports = function (app) {
@@ -60,7 +62,15 @@ module.exports = function (app) {
   app.get('*', (req, res) => {
     getTemplate().then(template => {
       // console.log(serverBundle)
-      const content = ReactDomServer.renderToString(serverBundle)
+
+      const routerContext = {}
+      const app = serverBundle(createStoreMap(), routerContext, req.url)
+      const content = ReactDomServer.renderToString(app)
+      if (routerContext.url) {
+        res.status(302).setHeader('Location', routerContext.url)
+        res.end()
+        return
+      }
       res.send(template.replace('<!-- app -->', content))
     })
   })
