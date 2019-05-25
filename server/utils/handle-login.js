@@ -1,7 +1,5 @@
-import express from 'express'
 import axios from 'axios'
-
-const router = express.Router()
+const router = require('express').Router()
 const baseUrl = 'http://cnodejs.org/api/v1'
 
 router.post('/login', (req, res, next) => {
@@ -33,3 +31,5 @@ router.post('/login', (req, res, next) => {
       }
     })
 })
+
+module.exports = router

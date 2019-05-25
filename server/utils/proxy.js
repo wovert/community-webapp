@@ -2,9 +2,9 @@ import axios from 'axios'
 
 const baseUrl = 'http://cnodejs.org/api/v1'
 
-export default (req, res, next) => {
+module.exports = function (req, res, next) {
   const { path } = req
-  const { user = {} } = req.session.user
+  const { user = {} } = req.session
   const needAccessToken = req.query.needAccessToken
   if (needAccessToken && user.accessToken) {
     res.status(401).send({
@@ -12,7 +12,7 @@ export default (req, res, next) => {
       msg: 'need login'
     })
   }
-
+  const query = Object.assign({}, req.query)
   axios(`${baseUrl}${path}`, {
     method: req.method,
     params: query,
