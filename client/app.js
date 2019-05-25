@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App.jsx'
+// eslint-disable-next-line import/no-unresolved
+import ClientApp from './views/ClientApp'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<ClientApp />, document.getElementById('root'))
 // ReactDOM.hydrate(<App />, document.getElementById('root'))

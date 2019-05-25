@@ -439,3 +439,25 @@ trim_trailing_whitespace = true
 # vim package.json
   nodemon --exec babel-node server/server.js
 ```
+
+## 目录结构
+
+- `views`: 功能模块的页面，根据路由配置情况分割子级目录
+- `config`: 配置目录，第三方类库引用、路由配置
+- `store`: 数据管理目录
+- `components`: 非业务组件，或者多个业务间需要用到的功用组件
+
+## 路由
+
+> 用来区分一个网站不同功能模块的地址，浏览器通过访问同一站点下的不同路由，来访问网站不同的功能。同样路由也让开发者区分返回的内容
+
+### 前段路由
+
+HTML5 API 中的 `history` 能够让我们控制 url 跳转之后并不刷新新页面，而是交给JS代码进行相应操作。在 `history api` 出现之前，可以使用 `hash` 跳转来实现
+
+- `react-router` 是`react-router-dom` 和 `react-router-native` 集合包
+- 网站只需要 `react-router-dom`
+
+```sh
+yarn add react-router-dom
+```

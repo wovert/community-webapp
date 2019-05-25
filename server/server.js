@@ -1,5 +1,8 @@
 import express from 'express'
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
+// eslint-disable-next-line no-unused-vars
+import { StaticRouter } from 'react-router-dom'
 import favicon from 'serve-favicon'
 import { renderToString } from 'react-dom/server'
 import fs from 'fs'
@@ -19,7 +22,12 @@ if (!isDev) {
 
   // 請求任何請求
   app.get('*', (req, res) => {
-    const appString = renderToString(serverEntry)
+    const context = {}
+    const appString = renderToString(
+      <StaticRouter location={req.url} context={context}>
+        {serverEntry}
+      </StaticRouter>
+    )
     res.send(template.replace('<!-- app -->', appString))
   })
 } else {
@@ -27,6 +35,6 @@ if (!isDev) {
   devStatic(app)
 }
 
-app.listen(port, (err) => {
+app.listen(port, () => {
   console.log(`server is listening on ${port}`)
 })

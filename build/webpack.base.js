@@ -4,6 +4,9 @@ module.exports = {
   output: { // 输出配置
     path: path.join(__dirname, '../dist') // 输出目录
   },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   module: {
     rules: [
       {

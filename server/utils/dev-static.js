@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const axios = require('axios')
 const path = require('path')
 const webpack = require('webpack')
@@ -5,7 +6,7 @@ const MemoryFs = require('memory-fs')
 const proxy = require('http-proxy-middleware')
 const ReactDomServer = require('react-dom/server')
 
-const serverConfig = require('../../build/webpack.config.server') 
+const serverConfig = require('../../build/webpack.config.server')
 
 const getTemplate = () => {
   return new Promise((resolve, reject) => {
@@ -18,7 +19,7 @@ const getTemplate = () => {
 }
 
 const Module = module.constructor
-const mfs = new MemoryFs
+const mfs = new MemoryFs()
 
 // 编译打包服务端
 const serverCompiler = webpack(serverConfig)
@@ -51,7 +52,6 @@ serverCompiler.watch({}, (err, stats) => {
 })
 
 module.exports = function (app) {
-
   app.use('/public', proxy({
     target: 'http://localhost:4000',
     changeOrigin: true

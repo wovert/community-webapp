@@ -1,4 +1,11 @@
 import React from 'react'
-import App from './App.jsx'
+import { StaticRouter } from 'react-router-dom'
 
-export default <App />
+/* eslint-disable import/extensions */
+import ServerApp from './views/ServerApp'
+
+export default (context, url) => (
+  <StaticRouter context={context} location={url}>
+    <ServerApp />
+  </StaticRouter>
+)

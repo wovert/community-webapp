@@ -23,6 +23,6 @@ if (!isDev) {
   devStatic(app)
 }
 
-app.listen(port, (err) => {
+app.listen(port, () => {
   console.log(`server is listening on ${port}`)
 })
